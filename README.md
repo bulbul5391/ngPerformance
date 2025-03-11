@@ -7,7 +7,7 @@ This guide highlights some **critical** performance improvements that can make a
 ### 🌿 **Branch List**  
 Explore different performance optimizations by checking out specific branches:  
 🔗 [forEach](https://github.com/bulbul5391/ngPerformance/tree/forEach?tab=readme-ov-file)  
-🔗 [forEachPip](https://github.com/bulbul5391/ngPerformance/tree/forEachPip?tab=readme-ov-file)  
+🔗 [forEachPipe](https://github.com/bulbul5391/ngPerformance/tree/forEachPipes?tab=readme-ov-file)  
 
 
 ---
