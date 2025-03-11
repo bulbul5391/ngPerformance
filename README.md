@@ -27,37 +27,53 @@ Explore different performance optimizations by checking out specific branches:
 
 ## 🔥 Key Optimization Techniques
 
-### 1️⃣ Use **OnPush Change Detection**
+### 1️⃣ Remove **OnPush Change Detection**
 
 By default, Angular uses **ChangeDetectionStrategy.Default**, which causes frequent re-renders. Switching to **OnPush** reduces unnecessary computations and improves performance.
 
 📍 Modify `app.component.ts`:
 
 ```typescript
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush // ✅ Apply OnPush Strategy
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   // Component Logic
 }
 ```
 
-### ✅ What Happens in Console Panel?
-
-- **Without OnPush:** `forEach` executes multiple times, causing redundant computations.
-- **With OnPush:** `forEach` runs only once, improving efficiency.
-- **Alternative:** Use Angular Pipes for similar performance benefits.
-
----
-
 ## 2️⃣ **Use Angular Pipes for Performance Gains**
 
 Angular **pipes** allow transforming data directly in the template, reducing the need for extra calculations inside the component.
+
+Create Pipe in src/app/share folder
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'forEachPipes'
+})
+export class ForEachPipesPipe implements PipeTransform {
+
+  transform(symbol: unknown, ...args: unknown[]): unknown {
+    console.log("function calling from pipes");
+    if(symbol == 'H')
+    {
+      return 'Height';
+    }else if(symbol == 'W')
+    {
+      return 'Weight';
+    }else{
+      return 'Null'
+    }
+  }
+
+}
+```
 
 📍 Modify `app.component.html`:
 
@@ -71,6 +87,12 @@ Angular **pipes** allow transforming data directly in the template, reducing the
 
 This leverages **pure pipes**, which execute only when input values change, leading to **better performance**.
 
+---
+
+### ✅ What Happens in Console Panel?
+
+- **Without Pipe:** `forEach` executes multiple times, causing redundant computations.
+- **With Pipe:** `forEach` runs only once, improving efficiency.
 ---
 
 ## 📜 Conclusion
