@@ -1,31 +1,87 @@
-# 🚀 Angular Performance Optimization  
+# 🚀 Angular Performance Optimization
 
-## 💡 Why Should We Optimize Angular Performance?  
-If you want to improve **Angular performance**, you must follow some key optimization techniques.  
-This guide highlights some **critical** performance improvements that can make a big difference.  
+## 📌 Introduction
 
-### 🌿 **Branch List**  
-Explore different performance optimizations by checking out specific branches:  
-🔗 [forEach](https://github.com/bulbul5391/ngPerformance/tree/forEach?tab=readme-ov-file)  
-🔗 [forEachPipes](https://github.com/bulbul5391/ngPerformance/tree/forEachPipes?tab=readme-ov-file)  
+Improving **Angular performance** is crucial for building fast and efficient applications. This guide covers essential **performance optimization techniques** to enhance the speed and responsiveness of your Angular 11 application.
 
+## 🌟 Why Optimize Angular Performance?
+
+By optimizing performance, you can:
+
+- Reduce unnecessary computations.
+- Improve UI responsiveness.
+- Minimize change detection overhead.
+- Enhance application scalability.
 
 ---
 
-## 🔥 Key Optimization Techniques  
+## 🌿 **Branch List**
 
-### 1️⃣ Use **OnPush Change Detection**  
-In **`app.component.ts`**, add the following line:  
+Explore different performance optimizations by checking out specific branches:
+
+🔗 [forEach](https://github.com/bulbul5391/ngPerformance/tree/forEach?tab=readme-ov-file) – Optimization using **forEach**.
+
+🔗 [forEachPipes](https://github.com/bulbul5391/ngPerformance/tree/forEachPipes?tab=readme-ov-file) – Optimization using **forEach with Pipes**.
+
+---
+
+## 🔥 Key Optimization Techniques
+
+### 1️⃣ Use **OnPush Change Detection**
+
+By default, Angular uses **ChangeDetectionStrategy.Default**, which causes frequent re-renders. Switching to **OnPush** reduces unnecessary computations and improves performance.
+
+📍 Modify `app.component.ts`:
 
 ```typescript
-changeDetection: ChangeDetectionStrategy.OnPush
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush // ✅ Apply OnPush Strategy
+})
+export class AppComponent {
+  // Component Logic
+}
 ```
-## 💡 What Happens in Console Panel?
 
-✅ Without OnPush, forEach executes multiple times, causing unnecessary re-renders. 
+### ✅ What Happens in Console Panel?
 
-✅ With OnPush, forEach executes only once, improving performance.
+- **Without OnPush:** `forEach` executes multiple times, causing redundant computations.
+- **With OnPush:** `forEach` runs only once, improving efficiency.
+- **Alternative:** Use Angular Pipes for similar performance benefits.
 
-✅ The same optimization can also be achieved using Angular Pipes.
+---
 
-This ensures better efficiency and reduces redundant computations in your Angular application. 🚀
+## 2️⃣ **Use Angular Pipes for Performance Gains**
+
+Angular **pipes** allow transforming data directly in the template, reducing the need for extra calculations inside the component.
+
+📍 Modify `app.component.html`:
+
+```html
+<ol>
+  <li *ngFor="let data of ELEMENT_DATA">
+    {{ data.symbol | forEachPipes }} : {{ data.weight }}
+  </li>
+</ol>
+```
+
+This leverages **pure pipes**, which execute only when input values change, leading to **better performance**.
+
+---
+
+## 📜 Conclusion
+
+By applying these **Angular performance optimizations**, your application will: ✅ Render faster. ✅ Reduce CPU load. ✅ Improve overall user experience.
+
+Explore the GitHub branches above for practical implementations of these optimizations. 🚀
+
+### 📌 Want to contribute?
+
+Feel free to fork the repository, open issues, or submit pull requests to improve Angular performance further!
+
+**Happy coding!** 🎯
+
