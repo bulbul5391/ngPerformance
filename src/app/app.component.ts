@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./app.component.sass']
+  //,changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   title = 'ngPerformance';
@@ -192,17 +192,17 @@ export class AppComponent {
     {"weight": 128, "symbol": "H"}
   ];
 
-  returnFullData(symbol:string){
-    console.log("function calling");
-    if(symbol == 'H')
-    {
-      return 'Height';
-    }else if(symbol == 'W')
-    {
-      return 'Weight';
-    }else{
-      return 'Null'
-    }
-  }
+  // returnFullData(symbol:string){
+  //   console.log("function calling");
+  //   if(symbol == 'H')
+  //   {
+  //     return 'Height';
+  //   }else if(symbol == 'W')
+  //   {
+  //     return 'Weight';
+  //   }else{
+  //     return 'Null'
+  //   }
+  // }
 
 }

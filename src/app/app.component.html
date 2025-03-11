@@ -1,5 +1,6 @@
 <ol>
   <li *ngFor="let data of ELEMENT_DATA">
-    {{returnFullData(data.symbol)}} : {{data.weight}}
+    <!-- {{returnFullData(data.symbol)}} : {{data.weight}} -->
+    {{data.symbol | forEachPipes}} : {{data.weight}}
   </li>
 </ol>
