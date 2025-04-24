@@ -1,0 +1,23 @@
+<div class="container text-center">
+    <div class="row mt-5">
+        <div class="col-sm-6">
+
+            <button (click)="updateData()" type="button" class="btn btn-primary mx-1">Update Data</button> 
+            <button (click)="ngOnInit()" type="button" class="btn btn-success mx-1">Reset Data</button>
+            
+            <table class="table table-hover table-primary mt-2">
+                <tbody>
+                    <tr *ngFor="let data of ELEMENT_DATA; trackBy:trackByElement">
+                        <td>{{data.name}}</td>
+                        <td>{{data.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            {{ELEMENT_DATA|json}}
+        </div>
+    </div>
+
+      
+</div>

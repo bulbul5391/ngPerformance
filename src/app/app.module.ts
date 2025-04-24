@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ForEachPipesPipe } from './share/for-each-pipes.pipe';
+import { appRoutes } from './app.routing';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -11,8 +12,8 @@ import { ForEachPipesPipe } from './share/for-each-pipes.pipe';
     ForEachPipesPipe
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    RouterModule.forRoot(appRoutes),
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,11 @@
-<ol>
-  <li *ngFor="let data of ELEMENT_DATA">
-    <!-- {{returnFullData(data.symbol)}} : {{data.weight}} -->
-    {{data.symbol | forEachPipes}} : {{data.weight}}
-  </li>
-</ol>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+  </head>
+  <body>
+    <router-outlet></router-outlet>
+  </body>
+</html>
