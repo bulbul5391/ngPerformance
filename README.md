@@ -23,76 +23,58 @@ Explore different performance optimizations by checking out specific branches:
 
 🔗 [forEachPipes](https://github.com/bulbul5391/ngPerformance/tree/forEachPipes?tab=readme-ov-file) – Optimization using **forEach with Pipes**.
 
+🔗 [trackBy](https://github.com/bulbul5391/ngPerformance/tree/trackBy?tab=readme-ov-file) – Optimization using **trackBy**.
+
 ---
 
-## 🔥 Key Optimization Techniques
+## 🔄 TrackBy Optimization in Angular
 
-### 1️⃣ Remove **OnPush Change Detection**
+Using Angular’s ***ngFor** directive with **trackBy** to improve rendering performance by avoiding unnecessary DOM manipulations.
 
-By default, Angular uses **ChangeDetectionStrategy.Default**, which causes frequent re-renders. Switching to **OnPush** reduces unnecessary computations and improves performance.
+### 🧠 Why trackBy?**
 
-📍 Modify `app.component.ts`:
+When using ***ngFor**, Angular re-renders the entire list by default—even if only one item changes. The **trackBy** function tells Angular how to uniquely identify items, so it only updates what’s necessary.
+
+🧪 Example Use Case
+
+📍 File `track-by-elements.component.html`:
 
 ```typescript
-import { Component } from '@angular/core';
+<div class="container text-center">
+    <div class="row mt-5">
+        <div class="col-sm-6">
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  // Component Logic
-}
+            <button (click)="updateData()" type="button" class="btn btn-primary mx-1">Update Data</button> 
+            <button (click)="ngOnInit()" type="button" class="btn btn-success mx-1">Reset Data</button>
+            
+            <table class="table table-hover table-primary mt-2">
+                <tbody>
+                    <tr *ngFor="let data of ELEMENT_DATA; trackBy:trackByElement">
+                        <td>{{data.name}}</td>
+                        <td>{{data.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            {{ELEMENT_DATA|json}}
+        </div>
+    </div>
+</div>
 ```
+📍 File `track-by-elements.component.ts`:
 
-## 2️⃣ **Use Angular Pipes for Performance Gains**
-
-Angular **pipes** allow transforming data directly in the template, reducing the need for extra calculations inside the component.
-
-Create Pipe in src/app/share folder
 ```typescript
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-  name: 'forEachPipes'
-})
-export class ForEachPipesPipe implements PipeTransform {
-
-  transform(symbol: unknown, ...args: unknown[]): unknown {
-    console.log("function calling from pipes");
-    if(symbol == 'H')
-    {
-      return 'Height';
-    }else if(symbol == 'W')
-    {
-      return 'Weight';
-    }else{
-      return 'Null'
-    }
+  trackByElement(index:number, item:TrackByElements): number{
+    return item.weight
   }
-
-}
 ```
 
-📍 Modify `app.component.html`:
+### ✅ What Happens in Browser Elements?
 
-```html
-<ol>
-  <li *ngFor="let data of ELEMENT_DATA">
-    {{ data.symbol | forEachPipes }} : {{ data.weight }}
-  </li>
-</ol>
-```
+- **Without trackBy:** When you click the **Update Data** button, Angular checks every item in the list and re-renders all of them, even if only one item changed. This can slow  down if the list is big.
 
-This leverages **pure pipes**, which execute only when input values change, leading to **better performance**.
-
----
-
-### ✅ What Happens in Console Panel?
-
-- **Without Pipe:** `forEach` executes multiple times, causing redundant computations.
-- **With Pipe:** `forEach` runs only once, improving efficiency.
+- **With trackBy:** When you use **trackBy**, Angular knows which item changed. So it only re-renders that one item instead of the whole list. This makes your app faster and more efficient.
 ---
 
 ## 📜 Conclusion
